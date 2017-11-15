@@ -15,9 +15,13 @@ abstract public class GraphicsObject {
 
     abstract void move(Point delta);
 
+    public int size() { return 1; }
+
+    public boolean isGroup(){return false;}
+
     abstract public String toJson();
 
     abstract public String toString();
 
-    private int m_ID;
+    protected int m_ID;
 }
