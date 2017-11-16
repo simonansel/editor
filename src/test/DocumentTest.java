@@ -14,8 +14,8 @@ public class DocumentTest extends TestCase {
 
         layer.add(c);
 
-        assertTrue(document.select(new Point(1,1), 8).size() == 1);
-        assertTrue(document.select(new Point(1,1), 8).firstElement().getID() == c.getID());
+        assertTrue(editorUtilities.select(new Point(1,1), 8, document).size() == 1);
+        assertTrue(editorUtilities.select(new Point(1,1), 8,document).firstElement().getID() == c.getID());
     }
 
     @Test
@@ -28,7 +28,7 @@ public class DocumentTest extends TestCase {
         layer.add(c);
         layer.add(s);
 
-        assertTrue(document.select(new Point(1,1), 8).size() == 2);
+        assertTrue(editorUtilities.select(new Point(1,1), 8,document).size() == 2);
     }
 
     @Test
