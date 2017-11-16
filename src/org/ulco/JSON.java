@@ -12,7 +12,6 @@ public class JSON {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return o;
     }
 

@@ -1,9 +1,7 @@
 package org.ulco;
 
 abstract public class GraphicsObject {
-    public GraphicsObject() {
-        m_ID = ++ID.ID;
-    }
+    public GraphicsObject() { m_ID = ID.getInstance().GetID(); }
 
     abstract public GraphicsObject copy();
 

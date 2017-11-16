@@ -8,7 +8,7 @@ public class LayerTest extends TestCase {
     @Test
     public void testType() throws Exception {
         Document document = new Document();
-        int oldID = ID.ID;
+        int oldID = ID.getInstance().GetLastID();
         Layer layer = document.createLayer();
 
         layer.add(new Square(new Point(2, 8), 10));
