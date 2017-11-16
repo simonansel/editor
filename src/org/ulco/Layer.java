@@ -2,14 +2,13 @@ package org.ulco;
 
 import java.util.Vector;
 
-public class Layer {
+public class Layer{
     public Layer() {
-        m_list = new Vector<GraphicsObject>();
-        m_ID = ID.getInstance().GetID();
+        group = new Group();
     }
 
     public Layer(String json) {
-        m_list= new Vector<GraphicsObject>();
+        group = new Group();
         String str = json.replaceAll("\\s+","");
         int objectsIndex = str.indexOf("objects");
         int endIndex = str.lastIndexOf("}");
@@ -18,19 +17,19 @@ public class Layer {
     }
 
     public void add(GraphicsObject o) {
-        m_list.add(o);
+        group.add(o);
     }
 
     public GraphicsObject get(int index) {
-        return m_list.elementAt(index);
+        return group.getM_objectList().elementAt(index);
     }
 
     public int getObjectNumber() {
-        return m_list.size();
+        return group.size();
     }
 
     public int getID() {
-        return m_ID;
+        return group.getID();
     }
 
     private void parseObjects(String objectsStr) {
@@ -43,7 +42,7 @@ public class Layer {
             } else {
                 objectStr = objectsStr.substring(0, separatorIndex);
             }
-            m_list.add(JSON.parse(objectStr));
+            group.add(JSON.parse(objectStr));
             if (separatorIndex == -1) {
                 objectsStr = "";
             } else {
@@ -80,21 +79,22 @@ public class Layer {
     public String toJson() {
         String str = "{ type: layer, objects : { ";
 
-        for (int i = 0; i < m_list.size(); ++i) {
-            GraphicsObject element = m_list.elementAt(i);
+        for (int i = 0; i < group.size(); ++i) {
+            if(!group.getM_objectList().elementAt(i).isGroup()) {
+                GraphicsObject element = group.getM_objectList().elementAt(i);
 
-            str += element.toJson();
-            if (i < m_list.size() - 1) {
-                str += ", ";
+                str += element.toJson();
+                if (i < group.size() - 1) {
+                    str += ", ";
+                }
             }
         }
         return str + " } }";
     }
 
     public Vector<GraphicsObject> getM_list() {
-        return m_list;
+        return group.getM_objectList();
     }
 
-    private Vector<GraphicsObject> m_list;
-    private int m_ID;
+    private Group group;
 }

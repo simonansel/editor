@@ -7,7 +7,6 @@ public class Group extends GraphicsObject {
     public Group() {
         super();
         m_objectList = new Vector<>();
-
     }
 
     public Group(String json) {
@@ -194,6 +193,10 @@ public class Group extends GraphicsObject {
             }
         }
         return str + "]]";
+    }
+
+    public Vector<GraphicsObject> getM_objectList() {
+        return m_objectList;
     }
 
     private Vector<GraphicsObject> m_objectList;
